@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<a href="#" id="go-top">Top ↑</a>
+<script src="{% static 'home/js/jquery.appear.js' %}"></script>
+<script src="{% static 'home/js/config.js' %}"></script>
+<script>^M
+var _hmt = _hmt || [];^M
+(function() {^M
+  var hm = document.createElement("script");^M
+  hm.src = "https://hm.baidu.com/hm.js?ad9ab5e37c2811b9f0979e46123fc898";^M
+  var s = document.getElementsByTagName("script")[0]; ^M
+  s.parentNode.insertBefore(hm, s);^M
+})();^M
+</script>
+
+<script src="{% static 'home/js/jquery.fancybox.pack.js' %}"></script>
+<script>
+$(document).ready(function () {
+    $(".entry a").each(function (i, e) {
+        if(e.host != 'www.leavesongs.com') {
+            e.target = '_blank';
+        }
+    });
+    $(".entry img").each(function (i, e) {
+        if(e.parentNode.tagName.toUpperCase() != 'A') {
+            $(e).wrap('<a href="'+escapeHtml(e.src)+'" class="fancybox"></a>');
+        } else {
+            $(e.parentNode).addClass('fancybox');
+        }
+    });
+    $('.fancybox').fancybox();
+})
+</script>

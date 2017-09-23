@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}文章详情{% endblock %}
+
+{% block path %}
+                <a href="/">首页 >></a> 
+                {{article.category.name}} >>
+                <a href="/article/{{article.pk}}">{{article.title}}</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="col-11 columns" id="mainbody" role="main">
+        <div class="post-single type-post">
+            <h1 class="article-h1">{{article.title}}</h1>
+            <div class="details-up">
+  	    <span class="author">作者: {{article.author}}</span>
+  
+            <span class="category">分类: <a href="{% url 'article:category' article.category.pk %}">{{article.category.name}}</a></span>
+  
+            <span class="date">时间: {{article.create_time}}</span>
+            <span class="comments-top" itemprop="interactionCount">评论：<a itemprop="discussionUrl" href="/PENETRATION/django-debug-page-xss.html#reply-list">2条评论</a></span>
+            <span class="comments-top" itemprop="interactionCount">浏览：<a itemprop="discussionUrl" href="/PENETRATION/django-debug-page-xss.html">1585人看过</a></span>
+  
+            <span class="date">标签:
+            {% for tag in article.tags.all %}
+            <a href="/tag/django">{{tag.name}}</a>
+            {% endfor %}
+            </span>
+
+            </div>
+            
+            <div class="entry">
+            <!--文章正文-->
+            {{article.body | safe}}
+            </div>
+
+
+
+
+            <div itemprop="keywords" class="tags-meta">
+                标签:
+
+                    <a href="/tag/django">django</a>
+
+                    <a href="/tag/xss">xss</a>
+
+            </div>
+            <br>
+
+{% endblock %}
+
+
+

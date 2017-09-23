@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html class="no-js">
+
+{% include 'head.html' %}
+
+<body>
+{% include 'topline.html' %}
+
+
+<div class="banner-bar">
+    <div class="container">
+        <div class="col-12 columns">
+            <div class="place">
+		{% block path %} {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block content %}{% endblock %}
+
+{% include 'noclear.html' %}
+
+
+{% include 'bottomscrtpt.html' %}
+
+
+</body>
+
+</html>

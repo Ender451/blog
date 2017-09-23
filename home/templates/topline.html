@@ -1,0 +1,48 @@
+{% load staticfiles %}
+<!--[if lt IE 8]>
+    <div class="browsehappy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
+<![endif]-->
+<div id="header">
+    <div class="container">
+        <h1 class="h1-title">
+            <a href="{% url 'home:index' %}">
+               <img src="{% static 'home/picture/pythonlogo.png' %}" alt="川陀图书馆" />
+               The Trantor Library
+            </a>
+        </h1>
+        <div id="nav">
+        <input type="checkbox" id="button">
+        <label for="button" onclick>菜单</label>
+        <ul>
+            <li class="item ">
+                <a href="{% url 'home:index' %}" >首页</a>
+            </li>
+            <li class="item ">
+                <a href="/articlelist/" >文章</a>
+            </li>
+            
+            <li class="item ">
+                <a href="/other/tinger.html" >关于</a>
+            </li>
+            
+            <li class="item ">
+                <a href="/other/friends-link.html" >友链</a>
+            </li>
+            
+            <li class="item ">
+                <a href="https://github.com/phith0n" target="_blank" >项目</a>
+            </li>
+
+            <li class="item ">
+                <a href="http://blog.guozhongyuan.cn/admin" >管理</a>
+            </li>
+            
+            <li class="item ">
+                <a href="https://www.guozhongyuan.cn" >Jumpserver</a>
+            </li>
+            
+        </ul>
+        
+        </div>
+    </div>
+</div>

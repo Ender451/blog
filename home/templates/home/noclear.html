@@ -1,0 +1,325 @@
+<!--MOB SHARE BEGIN-->
+<div class="-mob-share-ui-button -mob-share-open">分享</div>
+<div class="-mob-share-ui" style="display: none">
+    <ul class="-mob-share-list">
+        <li class="-mob-share-weibo"><p>新浪微博</p></li>
+        <li class="-mob-share-qzone"><p>QQ空间</p></li>
+        <li class="-mob-share-qq"><p>QQ好友</p></li>
+        <li class="-mob-share-weixin"><p>微信</p></li>
+        <li class="-mob-share-douban"><p>豆瓣</p></li>
+        <li class="-mob-share-facebook"><p>Facebook</p></li>
+        <li class="-mob-share-twitter"><p>Twitter</p></li>
+        <li class="-mob-share-pocket"><p>Pocket</p></li>
+        <li class="-mob-share-google"><p>Google+</p></li>
+        <li class="-mob-share-youdao"><p>有道云笔记</p></li>
+        <li class="-mob-share-mingdao"><p>明道</p></li>
+        <li class="-mob-share-tumblr"><p>Tumblr</p></li>
+        <li class="-mob-share-instapaper"><p>Instapaper</p></li>
+        <li class="-mob-share-linkedin"><p>LinkedIn</p></li>
+    </ul>
+    <div class="-mob-share-close">取消</div>
+</div>
+<div class="-mob-share-ui-bg"></div>
+<script id="-mob-share" src="js/mob-share.js"></script>
+<!--MOB SHARE END-->
+
+        <div class="qqlist">
+          <h3>订阅本站<small>(RSS)</small></h3>
+          <form method="post" target="_blank" action="https://list.qq.com/cgi-bin/qf_compose_send">
+          <input type="hidden" value="qf_booked_feedback" name="t" />
+          <input type="hidden" value="dace5c2b356504de449e7f3fc2bb59f3f6124d6563786446" name="id" />
+          <input type="text" placeholder="E-mail" value="" class="rsstxt" name="to" id="to" />
+          <button type="submit" >订阅&rarr;</button>
+          </form>
+        </div>
+
+
+        </div>
+        <div class="post-single type-post text-center">
+            <h3 style="margin-top: 0">喜欢这篇文章，扫码和我成为赞友！</h3>
+            <img src="picture/zan.jpg" alt="">
+        </div>
+        <!-- 评论位置 -->
+        <div id="comments" class="comments">
+          <h3>已有 2 条评论</h3>
+            <ol class="comment-list">
+
+
+              <li class="comment-body" id="comment-2910">
+                <div class="clearfix">
+                    <div class="comment-author">
+                        <img src="picture/d41d8cd98f00b204e9800998ecf8427e.jpg">
+                    </div>
+                    <div class="comment-meta">
+                    <div class="fn"><a href="" target="_blank">Kyrie</a></div>
+                    <p>这里会不会造成类似jinjia2模板注入的问题，如果有的话是不是就从一个XSS变成一个RCE了</p>
+                    <span class="comment-time">时间: 2017-09-12 15:13</span>
+                    <span class="comment-reply"><a href="#comment-2910" onclick="reply_to('2910','Kyrie')">回复</a></span>
+                    </div>
+                </div>
+              </li>
+
+	      <li class="comment-body" id="comment-2911">
+                <div class="clearfix">
+                    <div class="comment-author">
+                        <img src="picture/c4267eb6d17276fa31c547ac71611e90.jpg">
+                    </div>
+                    <div class="comment-meta">
+                    <div class="fn"><a href="https://www.leavesongs.com" target="_blank">phithon</a></div>
+                    <p>@Kyrie 不会，因为不存在模板字符串拼接，而且Django的模板沙箱也比较厉害。</p>
+                    <span class="comment-time">时间: 2017-09-13 12:57</span>
+                    <span class="comment-reply"><a href="#comment-2911" onclick="reply_to('2911','phithon')">回复</a></span>
+                    </div>
+                </div>
+              </li>
+
+
+            </ol>
+
+        </div>
+
+
+        <div id="reply"></div>
+        <div id="comment-place">
+            <div id="comment-post" class="respond none-resize">
+             <div id="respond">
+                <h3 id="response">添加新评论</h3>
+                <form method="post" id="comment-form" role="form" action="#comments">
+                    <p>
+                        <label for="author" class="required">称呼</label>
+                        <input type="text" name="nickname" value="" placeholder="昵称" maxlength="64" required id="id_nickname" />
+                    </p>
+                    <p>
+                        <label for="mail">Email</label>
+                        <input type="text" name="email" value="" placeholder="邮箱（可留空）" maxlength="254" id="id_email" />
+                    </p>
+                    <p>
+                        <label for="url">网站</label>
+                        <input type="text" name="url" value="" placeholder="链接（可留空）" maxlength="200" id="id_url" />
+                    </p>
+                    <p>
+                        <label for="textarea" class="required">内容</label>
+                        <textarea name="content" cols="40" rows="6" required id="id_content"></textarea>
+                    </p>
+                    <p>
+                        <label style="float:left;">验证码</label>
+                        <div class="row" style="margin-top: 8px"><div class="col-xs-4"><input autocomplete="off" id="id_captcha_1" name="captcha_1" type="text" placeholder="验证码" /> <inpu
+t id="id_captcha_0" name="captcha_0" type="hidden" value="bf1a523df57b7cccdbcb030128087c17914b2270" />
+			</div><div class="col-xs-4">
+			<img src="picture/e79da8a0db0947aebdcca042b1f8b118.gif" alt="captcha" class="captcha" height="25" /></div></div>
+                    </p>
+                    <p>
+                        <button type="submit" class="submit">提交评论</button>
+                        <input type="hidden" name="parent" id="id_parent" />
+                        <input type="hidden" name="archive" value="426" id="id_archive" />
+                        <input type='hidden' name='csrfmiddlewaretoken' value='TYmQ6wTVnYrbBxPqY901YHpq6Gpmjr3VY0g7dYl4Zbbt2Y1vJxrpBPkRGB0CvdVH' />
+                    </p>
+                </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+<div  class="col-5 columns" id="sidebar" role="complementary">
+
+  <div class="widget widget_search">
+    <h3>搜索</h3>
+    <form action="/search/" id="searchform" method="get">
+        <input type="text" id="searchkey" name="keyword" value="" class="searchkey" placeholder="Search..."/>
+        <button type="submit"  id="searchsubmit">Go</button>
+    </form>
+  </div>
+
+
+
+  <div class="widget">
+        <h3 class="widget-title">最新评论</h3>
+        <ul class="widget-list" id="recent-comment">
+
+
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/591e70d58dd0efbe1da3cb83f2f3c0c0.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>影乐</cite>：<a href="/other/tinger.html#comment-2914">学长厉害了</a></div>
+        </li>
+
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/d41d8cd98f00b204e9800998ecf8427e.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>&lt;audio src=x onerror=alert(&#39;audio&#39;);&gt;</cite>：<a href="/PENETRATION/getshell-via-ssrf-and-redis.html#comment-2913">&lt;audio src=x onerror=alert(&#39;audio&#39;);&gt;^M煮屎者</a></div>
+        </li>
+
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/2f2224c85fe48ba7ab31fb3100745d53.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>墨攻</cite>：<a href="/PENETRATION/metinfo-5.3.17-sql-injection.html#comment-2912">最近在审计一个小的cms，看了半天竟然没发现漏洞，我开始怀职业了，不知大佬能否帮忙看一下...</a></div>
+        </li>
+
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/d41d8cd98f00b204e9800998ecf8427e.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>Kyrie</cite>：<a href="/PENETRATION/django-debug-page-xss.html#comment-2910">这里会不会造成类似jinjia2模板注入的问题，如果有的话是不是就从一个XS变成一个RCE了</a></div>
+        </li>
+
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/c4267eb6d17276fa31c547ac71611e90.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>phithon</cite>：<a href="/PENETRATION/django-debug-page-xss.html#comment-2911">@Kyrie 不会，因为不存在模板字符串拼接，而且Django的模板沙箱厉害。</a></div>
+        </li>
+
+    </ul>
+  </div>
+
+  <div class="widget widget-category">
+        <h3>分类</h3>
+        <ul id="blogsort" class="widget-list">
+
+
+    <li>
+        <a href="/sort/PENETRATION">网络安全<em>101</em></a>
+    </li>
+
+    <li>
+        <a href="/sort/C">C/C++<em>32</em></a>
+    </li>
+
+    <li>
+        <a href="/sort/PYTHON">Python<em>18</em></a>
+    </li>
+
+    <li>
+        <a href="/sort/SHARE">资源分享<em>15</em></a>
+    </li>
+
+    <li>
+        <a href="/sort/HTML">web前端<em>13</em></a>
+    </li>
+
+    </ul>
+  </div>
+
+
+  <div class="widget widget-tag">
+        <h3>随机标签</h3>
+        <div class="tag-cloud">
+
+
+        <a rel="tag" href="/tag/%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E">上传漏洞</a>
+
+        <a rel="tag" href="/tag/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84">内存映射</a>
+
+        <a rel="tag" href="/tag/sqlite3_exec">sqlite3_exec</a>
+
+        <a rel="tag" href="/tag/lua">lua</a>
+
+        <a rel="tag" href="/tag/brainfuck">brainfuck</a>
+
+        <a rel="tag" href="/tag/socket">socket</a>
+
+        <a rel="tag" href="/tag/php-fpm">php-fpm</a>
+
+        <a rel="tag" href="/tag/javascript">javascript</a>
+
+        <a rel="tag" href="/tag/phpcms">phpcms</a>
+
+        <a rel="tag" href="/tag/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86">大文件处理</a>
+
+        <a rel="tag" href="/tag/fliter">fliter</a>
+
+        <a rel="tag" href="/tag/%E8%B5%9B%E6%A3%8D">赛棍</a>
+
+        <a rel="tag" href="/tag/Ubuntu">Ubuntu</a>
+
+        <a rel="tag" href="/tag/VS2010">VS2010</a>
+
+        <a rel="tag" href="/tag/%E5%A4%A7%E6%95%B0%E4%B9%98%E6%B3%95">大数乘法</a>
+
+        <a rel="tag" href="/tag/%E5%88%A4%E6%96%AD%E5%A5%87%E5%81%B6%E6%95%B0">判断奇偶数</a>
+
+        <a rel="tag" href="/tag/python">python</a>
+
+        <a rel="tag" href="/tag/%E5%8F%8D%E5%BC%B9shell">反弹shell</a>
+
+        <a rel="tag" href="/tag/php-cgi">php-cgi</a>
+
+        <a rel="tag" href="/tag/%E5%85%BC%E5%AE%B9%E6%80%A7">兼容性</a>
+
+        <a rel="tag" href="/tag/XXE">XXE</a>
+
+        <a rel="tag" href="/tag/git-shell">git-shell</a>
+
+        <a rel="tag" href="/tag/web%E5%BA%94%E7%94%A8">web应用</a>
+
+        <a rel="tag" href="/tag/%E5%88%97%E7%9B%AE%E5%BD%95%E6%BC%8F%E6%B4%9E">列目录漏洞</a>
+
+        <a rel="tag" href="/tag/jar%E6%89%93%E5%8C%85">jar打包</a>
+
+        <a rel="tag" href="/tag/%E5%AF%86%E6%96%87%E7%A0%B4%E8%A7%A3">密文破解</a>
+
+        <a rel="tag" href="/tag/php%E8%84%9A%E6%9C%AC%E5%AE%89%E5%85%A8">php脚本安全</a>
+
+        <a rel="tag" href="/tag/firefox">firefox</a>
+
+        <a rel="tag" href="/tag/emlog">emlog</a>
+
+        <a rel="tag" href="/tag/%E5%85%8D%E8%B4%B9">免费</a>
+
+    </div>
+  </div>
+
+  <div class="widget widget-recent-entries">
+        <h3 class="widget-title">热门日志</h3>
+        <ul id="hotlog" class="widget-list">
+
+
+        <li><a href="/PHP/phpdelfile.html">php遍历目录&amp;删除指定文件中指定内容</a></li>
+
+        <li><a href="/THINK/banjia.html">博客搬家成功</a></li>
+
+        <li><a href="/PENETRATION/vps-pentest.html">对自己VPS的一次安全检测</a></li>
+
+        <li><a href="/C/CGIforC_1.html">C语言CGI编程入门(一)</a></li>
+
+        <li><a href="/C/gh0st_2.html">gh0st源码分析与远控的编写(二)</a></li>
+
+    </ul>
+  </div>
+
+
+</div>
+</div>
+
+<div id="footer">
+        <!-- copyright -->
+        <div class="container">
+                <div class="row remove-bottom">
+                        <div class="col-6 columns">
+                        <h3>Little About</h3>
+                        <p>Phithon 非强迫症小青年  <br>
+现居先 <br>
+爱好：种花、买书、收藏明信片 <br>
+欢迎各大组织收留 <br>
+E-mail：root@leavesongs.com </p>
+                        </div>
+
+                        <div class="col-10 columns">
+
+                                <h3 class="mobile-hide">Follow me</h3>
+        <div id="social-links">
+          <a href="http://weibo.com/101yx" class="sweibo" target="_blank" title="新浪微博">新浪微博</a>
+          <a href="javascript:alert(/没有腾讯微博哟/)" class="qweibo" target="_blank" title="腾讯微博">腾讯微博</a>
+          <a href="javascript:alert(/墙外有什么/);window.open('http://google.com')" class="google" target="_blank" title="墙外的世界">google+</a>
+          <a href="https://github.com/phith0n" class="github" target="_blank" title="Github">github</a>
+          <a href="javascript:confirm(/mailto:root#leavesongs.com/)" class="mail" target="_blank" title="私信给我">私信给我</a>
+          <a href="/feed/" target="_blank" class="rss" title="离别歌">RSS订阅</a>
+        </div>
+        <div class="bot-line"></div>
+                                <p class="copyright">
+        Copyright &copy; Powered by talkbook
+                                &nbsp;&nbsp;<i>Designed and built with all the love in the world by <a href="https://www.leavesongs.com" target="_blank">Phithon</a> && deepsky </i>
+                    <a href="/template/change/">更换模板</a>
+                                </p>
+                        </div>
+                </div>
+        </div>
+        <!-- /copyright -->
+</div>
+

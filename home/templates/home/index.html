@@ -1,0 +1,348 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+{% load blog_tags %}
+<html lang=en>
+<html class="no-js">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="川陀图书馆管理员的学习测试网站。" />
+
+
+    <title>首页 | 川陀图书馆</title>
+    <link rel="alternate" type="application/atom+xml" href="/feed/" title="川陀图书馆" />
+
+    <link href="{% static 'home/css/base.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'home/css/style.css' %}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'home/js/jquery-1.9.1.min.js' %}"></script>
+    <script src="{% static 'home/js/common_tpl.js' %}" type="text/javascript"></script>
+    <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}" />
+    
+</head>
+<body>
+<!--[if lt IE 8]>
+    <div class="browsehappy" role="dialog">当前网页 <strong>不支持</strong> 你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/">升级你的浏览器</a>.</div>
+<![endif]-->
+<div id="header">
+    <div class="container">
+        <h1 class="h1-title">
+            <a href="{% url 'home:index' %}">
+               <img src="{% static 'home/picture/pythonlogo.png' %}" alt="川陀图书馆" />
+            </a>
+            The Trantor Library
+        </h1>
+        <div id="nav">
+        <input type="checkbox" id="button">
+        <label for="button" onclick>菜单</label>
+        
+        <ul>
+            
+            <li class="item ">
+                <a href="{% url 'home:index' %}" >首页</a>
+            </li>
+            
+            <li class="item ">
+                <a href="/articlelist/" >文章</a>
+            </li>
+            
+            <li class="item ">
+                <a href="/other/tinger.html" >关于</a>
+            </li>
+            
+            <li class="item ">
+                <a href="/other/friends-link.html" >友链</a>
+            </li>
+            
+            <li class="item ">
+                <a href="https://github.com/phith0n" target="_blank" >项目</a>
+            </li>
+  
+            <li class="item ">
+                <a href="http://blog.guozhongyuan.cn/admin" >管理</a>
+            </li>
+            
+            <li class="item ">
+                <a href="http://www.guozhongyuan.cn" >Jumpserver</a>
+            </li>
+            
+        </ul>
+        
+        </div>
+    </div>
+</div>
+
+<div class="slider">
+  <div class="banner-overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 columns">
+        <div class="hero">
+          <h2>川陀图书馆</h2>
+          <p id="blog_info">一个正在搭建中的blog。  学习模仿自--><a href="https://www.leavesongs.com/">https://www.leavesongs.com/</a></p>
+          <mark class="mark">Exist • Hope • Essencs • Action</mark>
+        </div>
+        <ul class="project clearfix" id="main-word">
+           <li><h3>Exist</h3>
+              <p>我思故我在。<br>——笛卡尔</br></p>
+          </li>
+          <li><h3>Hope</h3>
+              <p>人生的全部意义包含在这两个词上--“等待”和“希望”。——大仲马</p>
+          </li>
+          <li><h3>Essencs</h3>
+              <p>我想知道世界的内在规律，其余则是细枝末节。<br>——爱因斯坦</br></p>
+          </li>
+          <li><h3>Action</h3>
+              <p>你想要的是什么，通过什么方法可以的得到它，去做。<br>——self</br></p>
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 columns" id="flash">
+            <div class="panel-flash">
+              <a href="javascript:void(0)" class="stag stage3" style="display:block" ><img src="{% static 'home/picture/13.jpg' %}" alt="deep"></a>
+              <a href="javascript:void(0)" class="stag stage1" style="display:none"><img src="{% static 'home/picture/11.jpg' %}" alt="about-me"></a>
+              <a href="javascript:void(0)" class="stag stage2" style="display:none"><img src="{% static 'home/picture/12.jpg' %}" alt="code"></a>
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+<div class="col-11 columns" id="mainbody">
+
+{% for article in articles %}
+<div class="post type-post" >
+    <h2 class='loading-title' itemprop="name headline">
+    <a itemtype="url" href="/article/{{article.pk}}/" title="{{article.title}}">{{article.title}}</a>
+    </h2>
+    <div class="details-up">
+        <span class="author">作者:{{ article.author }}</span>
+        <span class="category">分类:<a href="/sort/PENETRATION">{{article.category.name}}</a></span>
+        <span class="date">时间：{{article.create_time}}</span>
+        <span class="comments-top" itemprop="interactionCount">评论:<a itemprop="discussionUrl" href="/PENETRATION/php-cgi-cve-2012-1823.html#reply-list">{{ article.comment_set.count }}条评论</a></span>
+        <span class="comments-top" itemprop="interactionCount">浏览:<a itemprop="discussionUrl" href="/PENETRATION/php-cgi-cve-2012-1823.html">{{article.views}}人看过</a></span>
+        <span class="date">标签:
+	    {% for tag in article.tags.all %}
+            <a href="/tag/php-cgi">{{tag.name}}</a>
+            {% endfor %}
+        </span>
+    </div>
+    <div class="entry">
+        {{article.excerpt}}
+    </div>
+</div>
+
+    {% empty %}
+    <div class="post type-post">
+        还没有文章发布
+    </div>
+{% endfor%}
+
+
+</div> <!-- id="mainbody" -->
+
+
+
+
+<div  class="col-5 columns" id="sidebar" role="complementary">
+
+  <div class="widget widget_search">
+    <h3>搜索</h3>
+    <form action="/search/" id="searchform" method="get">
+        <input type="text" id="searchkey" name="keyword" value="" class="searchkey" placeholder="Search..."/>
+        <button type="submit"  id="searchsubmit">Go</button>
+    </form>
+  </div>
+
+  
+  <div class="widget">
+	<h3 class="widget-title">最新评论</h3>
+	<ul class="widget-list" id="recent-comment">
+    
+    
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/591e70d58dd0efbe1da3cb83f2f3c0c0.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>影乐</cite>：<a href="/other/tinger.html#comment-2914">学长厉害了</a></div>
+        </li>
+    
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/d41d8cd98f00b204e9800998ecf8427e.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>&lt;audio src=x onerror=alert(&#39;audio&#39;);&gt;</cite>：<a href="/PENETRATION/getshell-via-ssrf-and-redis.html#comment-2913">&lt;audio src=x onerror=alert(&#39;audio&#39;);&gt;
+煮屎者</a></div>
+        </li>
+    
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/2f2224c85fe48ba7ab31fb3100745d53.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>墨攻</cite>：<a href="/PENETRATION/metinfo-5.3.17-sql-injection.html#comment-2912">最近在审计一个小的cms，看了半天竟然没发现漏洞，我开始怀疑我的职业了，不知大佬能否帮忙看一下...</a></div>
+        </li>
+    
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/d41d8cd98f00b204e9800998ecf8427e.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>Kyrie</cite>：<a href="/PENETRATION/django-debug-page-xss.html#comment-2910">这里会不会造成类似jinjia2模板注入的问题，如果有的话是不是就从一个XSS变成一个RCE了</a></div>
+        </li>
+    
+        <li id="comment" class="clearfix">
+            <img class="avatar" src="picture/c4267eb6d17276fa31c547ac71611e90.jpg" alt="%s" width="40" height="40">
+            <div class="comments-link"><cite>phithon</cite>：<a href="/PENETRATION/django-debug-page-xss.html#comment-2911">@Kyrie 不会，因为不存在模板字符串拼接，而且Django的模板沙箱也比较厉害。</a></div>
+        </li>
+    
+    </ul>
+  </div>
+
+        <div class="widget widget-category">
+            <h3>分类</h3>
+            {% get_categories as category_list %}
+            <ul id="blogsort" class="widget-list">
+                {% for category in  category_list %}
+                <li>
+                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>13</em></a>
+                </li>
+                {% empty %}
+                暂无分类
+                {% endfor %}
+            </ul>
+        </div>
+
+
+  <div class="widget widget-tag">
+	<h3>随机标签</h3>
+	<div class="tag-cloud">
+        
+        
+        <a rel="tag" href="/tag/%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E">上传漏洞</a>
+        
+        <a rel="tag" href="/tag/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84">内存映射</a>
+        
+        <a rel="tag" href="/tag/sqlite3_exec">sqlite3_exec</a>
+        
+        <a rel="tag" href="/tag/lua">lua</a>
+        
+        <a rel="tag" href="/tag/brainfuck">brainfuck</a>
+        
+        <a rel="tag" href="/tag/socket">socket</a>
+        
+        <a rel="tag" href="/tag/php-fpm">php-fpm</a>
+        
+        <a rel="tag" href="/tag/javascript">javascript</a>
+        
+        <a rel="tag" href="/tag/phpcms">phpcms</a>
+        
+        <a rel="tag" href="/tag/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86">大文件处理</a>
+        
+        <a rel="tag" href="/tag/fliter">fliter</a>
+        
+        <a rel="tag" href="/tag/%E8%B5%9B%E6%A3%8D">赛棍</a>
+        
+        <a rel="tag" href="/tag/Ubuntu">Ubuntu</a>
+        
+        <a rel="tag" href="/tag/VS2010">VS2010</a>
+        
+        <a rel="tag" href="/tag/%E5%A4%A7%E6%95%B0%E4%B9%98%E6%B3%95">大数乘法</a>
+        
+        <a rel="tag" href="/tag/%E5%88%A4%E6%96%AD%E5%A5%87%E5%81%B6%E6%95%B0">判断奇偶数</a>
+        
+        <a rel="tag" href="/tag/python">python</a>
+        
+        <a rel="tag" href="/tag/%E5%8F%8D%E5%BC%B9shell">反弹shell</a>
+        
+        <a rel="tag" href="/tag/php-cgi">php-cgi</a>
+        
+        <a rel="tag" href="/tag/%E5%85%BC%E5%AE%B9%E6%80%A7">兼容性</a>
+        
+        <a rel="tag" href="/tag/XXE">XXE</a>
+        
+        <a rel="tag" href="/tag/git-shell">git-shell</a>
+        
+        <a rel="tag" href="/tag/web%E5%BA%94%E7%94%A8">web应用</a>
+        
+        <a rel="tag" href="/tag/%E5%88%97%E7%9B%AE%E5%BD%95%E6%BC%8F%E6%B4%9E">列目录漏洞</a>
+        
+        <a rel="tag" href="/tag/jar%E6%89%93%E5%8C%85">jar打包</a>
+        
+        <a rel="tag" href="/tag/%E5%AF%86%E6%96%87%E7%A0%B4%E8%A7%A3">密文破解</a>
+        
+        <a rel="tag" href="/tag/php%E8%84%9A%E6%9C%AC%E5%AE%89%E5%85%A8">php脚本安全</a>
+        
+        <a rel="tag" href="/tag/firefox">firefox</a>
+        
+        <a rel="tag" href="/tag/emlog">emlog</a>
+        
+        <a rel="tag" href="/tag/%E5%85%8D%E8%B4%B9">免费</a>
+        
+    </div>
+  </div>
+
+  <div class="widget widget-recent-entries">
+	<h3 class="widget-title">热门日志</h3>
+	<ul id="hotlog" class="widget-list">
+    
+    
+        <li><a href="/PHP/phpdelfile.html">php遍历目录&amp;删除指定文件中指定内容</a></li>
+    
+        <li><a href="/THINK/banjia.html">博客搬家成功</a></li>
+    
+        <li><a href="/PENETRATION/vps-pentest.html">对自己VPS的一次安全检测</a></li>
+    
+        <li><a href="/C/CGIforC_1.html">C语言CGI编程入门(一)</a></li>
+    
+        <li><a href="/C/gh0st_2.html">gh0st源码分析与远控的编写(二)</a></li>
+    
+    </ul>
+  </div>
+  
+
+</div>
+</div>
+
+<div id="footer">
+	<!-- copyright -->
+	<div class="container">
+		<div class="row remove-bottom">
+			<div class="col-6 columns">
+			<h3>Little About</h3>
+			<p>Phithon 非强迫症小青年  <br>
+现居先 <br>
+爱好：种花、买书、收藏明信片 <br>
+欢迎各大组织收留 <br>
+E-mail：root@leavesongs.com </p>
+			</div>
+
+			<div class="col-10 columns">
+
+				<h3 class="mobile-hide">Follow me</h3>
+        <div id="social-links">
+          <a href="http://weibo.com/101yx" class="sweibo" target="_blank" title="新浪微博">新浪微博</a>
+          <a href="javascript:alert(/没有腾讯微博哟/)" class="qweibo" target="_blank" title="腾讯微博">腾讯微博</a>
+          <a href="javascript:alert(/墙外有什么/);window.open('http://google.com')" class="google" target="_blank" title="墙外的世界">google+</a>
+          <a href="https://github.com/phith0n" class="github" target="_blank" title="Github">github</a>
+          <a href="javascript:confirm(/mailto:root#leavesongs.com/)" class="mail" target="_blank" title="私信给我">私信给我</a>
+          <a href="/feed/" target="_blank" class="rss" title="离别歌">RSS订阅</a>
+        </div>
+        <div class="bot-line"></div>
+				<p class="copyright">
+	Copyright &copy; Powered by talkbook
+				&nbsp;&nbsp;<i>Designed and built with all the love in the world by <a href="https://www.leavesongs.com" target="_blank">Phithon</a> && deepsky </i>
+                    <a href="/template/change/">更换模板</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<!-- /copyright -->
+</div>
+<a href="#" id="go-top">Top ↑</a>
+<script src="{% static 'home/js/jquery.appear.js' %}"></script>
+<script src="{% static 'home/js/config.js' %}"></script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?ad9ab5e37c2811b9f0979e46123fc898";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+
+</html>
