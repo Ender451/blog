@@ -24,6 +24,7 @@ SECRET_KEY = 'a1o&7sfd7f($8i=!(#jkqr*jopu#ru6x!7$noz(pc=ht$yk&ej'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#DEBUG = False
 
 ALLOWED_HOSTS = ['blog.guozhongyuan.cn']
 #ALLOWED_HOSTS = ['*']
@@ -37,13 +38,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+ 
+    'haystack',
     'online.apps.OnlineConfig',
     'article.apps.ArticleConfig',
     'home.apps.HomeConfig',
     'comments.apps.CommentsConfig',
     
 ]
+
+HAYSTACK_CONNECTIONS = {
+    'default':{
+        'ENGINE':'article.whoosh_cn_backends.WhooshEngine',
+        #'ENGINE':'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        'PATH':os.path.join(BASE_DIR,'whoosh_index'),
+    },
+}
+HAYSTACK_SEARCH_RESULTS_PER_PAGE =10
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,11 +103,11 @@ WSGI_APPLICATION = 'gzystation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gzystation',
-        'HOST' : '127.0.0.1',
-        'PORT' : 3306,
+        'NAME': 'xxx',
+        'HOST' : 'xxx.xxx.xxx.xxx',
+        'PORT' : xxxx,
         'USER' : 'root',
-        'PASSWORD' : '123456',
+        'PASSWORD' : 'xxx',
         'CHARSET' : 'utf8',
     }
 }
@@ -140,6 +152,7 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static'),
+    #'/usr/local/lib/python3.5/dist-packages/django/contrib/admin/static/',
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'www', 'static')
@@ -147,6 +160,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'www', 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
 
 

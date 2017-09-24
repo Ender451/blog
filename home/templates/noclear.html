@@ -2,6 +2,8 @@
 {% load blog_tags %}
 
 <!--MOB SHARE BEGIN-->
+
+<!--
 <div class="-mob-share-ui-button -mob-share-open">分享</div>
     <div class="-mob-share-ui" style="display: none">
         <ul class="-mob-share-list">
@@ -25,7 +27,9 @@
 <div class="-mob-share-ui-bg">
 </div>
 <script id="-mob-share" src="{% static 'home/js/mob-share.js' %}"></script>
+-->
 <!--MOB SHARE END-->
+
 
 <div class="qqlist">
     <h3>订阅本站<small>(RSS)</small></h3>
@@ -150,16 +154,16 @@
 
 <div  class="col-5 columns" id="sidebar" role="complementary">
 
+
   <div class="widget widget_search">
     <h3>搜索</h3>
-    <form action="/search/" id="searchform" method="get">
-        <input type="text" id="searchkey" name="keyword" value="" class="searchkey" placeholder="Search..."/>
+    <form action="{% url 'haystack_search' %}" id="searchform" method="get">
+        <input type="search" id="searchkey" name="q" value="" class="searchkey" placeholder="Search..."/>
         <button type="submit"  id="searchsubmit">Go</button>
     </form>
   </div>
 
-
-
+<!--
   <div class="widget">
         <h3 class="widget-title">最新评论</h3>
         <ul class="widget-list" id="recent-comment">
@@ -193,6 +197,8 @@
     </ul>
   </div>
 
+-->
+
 <!--分类-->
         <div class="widget widget-category">
             <h3>分类</h3>
@@ -200,14 +206,14 @@
             <ul id="blogsort" class="widget-list">
                 {% for category in  category_list %}
                 <li>
-                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>13</em></a>
+                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>{{ category.get_article_num}}</em></a>
                 </li>
                 {% empty %}
                 暂无分类
                 {% endfor %}
             </ul>
         </div>
-
+<!--
   <div class="widget widget-tag">
         <h3>随机标签</h3>
         <div class="tag-cloud">
@@ -276,6 +282,9 @@
     </div>
   </div>
 
+-->
+
+<!--
   <div class="widget widget-recent-entries">
         <h3 class="widget-title">热门日志</h3>
         <ul id="hotlog" class="widget-list">
@@ -293,6 +302,9 @@
 
     </ul>
   </div>
+
+-->
+
 
         <div class="widget widget-recent-entries">
             <h3 class="widget-title">最新文章</h3>
@@ -317,29 +329,33 @@
                 <div class="row remove-bottom">
                         <div class="col-6 columns">
                         <h3>Little About</h3>
-                        <p>Phithon 非强迫症小青年  <br>
-现居先 <br>
-爱好：种花、买书、收藏明信片 <br>
-欢迎各大组织收留 <br>
-E-mail：root@leavesongs.com </p>
+                        <p>
+                           Ender451 科幻、技术爱好者  <br>
+                           现居 北京 <br>
+                           爱好：读书 游戏 <br>
+                           欢迎各位来串门 <br>
+                           E-mail：Ender451@qq.com
+                        </p>
                         </div>
 
                         <div class="col-10 columns">
 
                                 <h3 class="mobile-hide">Follow me</h3>
         <div id="social-links">
-          <a href="http://weibo.com/101yx" class="sweibo" target="_blank" title="新浪微博">新浪微博</a>
+          <a href="http://weibo.com/" class="sweibo" target="_blank" title="新浪微博">新浪微博</a>
           <a href="javascript:alert(/没有腾讯微博哟/)" class="qweibo" target="_blank" title="腾讯微博">腾讯微博</a>
           <a href="javascript:alert(/墙外有什么/);window.open('http://google.com')" class="google" target="_blank" title="墙外的世界">google+</a>
-          <a href="https://github.com/phith0n" class="github" target="_blank" title="Github">github</a>
-          <a href="javascript:confirm(/mailto:root#leavesongs.com/)" class="mail" target="_blank" title="私信给我">私信给我</a>
-          <a href="/feed/" target="_blank" class="rss" title="离别歌">RSS订阅</a>
+          <a href="https://github.com/Ender451" class="github" target="_blank" title="Github">github</a>
+          <a href="javascript:confirm(/mailto:Ender451@qq.com/)" class="mail" target="_blank" title="私信给我">私信给我</a>
+          <a href="/feed/" target="_blank" class="rss" title=:"川陀图书馆">RSS订阅</a>
         </div>
         <div class="bot-line"></div>
                                 <p class="copyright">
         Copyright &copy; Powered by talkbook
                                 &nbsp;&nbsp;<i>Designed and built with all the love in the world by <a href="https://www.leavesongs.com" target="_blank">Phithon</a> && deepsky </i>
+<!--
                     <a href="/template/change/">更换模板</a>
+-->
                                 </p>
                         </div>
                 </div>

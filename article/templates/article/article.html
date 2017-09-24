@@ -20,12 +20,12 @@
             <span class="category">分类: <a href="{% url 'article:category' article.category.pk %}">{{article.category.name}}</a></span>
   
             <span class="date">时间: {{article.create_time}}</span>
-            <span class="comments-top" itemprop="interactionCount">评论：<a itemprop="discussionUrl" href="/PENETRATION/django-debug-page-xss.html#reply-list">{{ article.comment_set.count }}条评论</a></span>
-            <span class="comments-top" itemprop="interactionCount">浏览：<a itemprop="discussionUrl" href="/PENETRATION/django-debug-page-xss.html">1585人看过</a></span>
+            <span class="comments-top" itemprop="interactionCount">评论：<a itemprop="discussionUrl" href="/">{{ article.comment_set.count }}条评论</a></span>
+            <span class="comments-top" itemprop="interactionCount">浏览：<a itemprop="discussionUrl" href="/">{{ article.views }}人看过</a></span>
   
             <span class="date">标签:
             {% for tag in article.tags.all %}
-            <a href="/tag/django">{{tag.name}}</a>
+            <a href="{% url 'article:tagurl' tag.pk %}">{{tag.name}}</a>
             {% endfor %}
             </span>
 
@@ -41,10 +41,9 @@
 
             <div itemprop="keywords" class="tags-meta">
                 标签:
-
-                    <a href="/tag/django">django</a>
-
-                    <a href="/tag/xss">xss</a>
+                     {% for tag in article.tags.all %}
+                     <a href="{% url 'article:tagurl' tag.pk %}">{{tag.name}}</a>
+                     {% endfor %}
 
             </div>
             <br>

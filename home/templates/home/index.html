@@ -46,15 +46,15 @@
             </li>
             
             <li class="item ">
-                <a href="/other/tinger.html" >关于</a>
+                <a href="/" >关于</a>
             </li>
             
             <li class="item ">
-                <a href="/other/friends-link.html" >友链</a>
+                <a href="/" >友链</a>
             </li>
             
             <li class="item ">
-                <a href="https://github.com/phith0n" target="_blank" >项目</a>
+                <a href="https://github.com/Ender451" target="_blank" >项目</a>
             </li>
   
             <li class="item ">
@@ -118,13 +118,13 @@
     </h2>
     <div class="details-up">
         <span class="author">作者:{{ article.author }}</span>
-        <span class="category">分类:<a href="/sort/PENETRATION">{{article.category.name}}</a></span>
+        <span class="category">分类:<a href="{% url 'article:category' article.category.pk %}">{{article.category.name}}</a></span>
         <span class="date">时间：{{article.create_time}}</span>
-        <span class="comments-top" itemprop="interactionCount">评论:<a itemprop="discussionUrl" href="/PENETRATION/php-cgi-cve-2012-1823.html#reply-list">{{ article.comment_set.count }}条评论</a></span>
-        <span class="comments-top" itemprop="interactionCount">浏览:<a itemprop="discussionUrl" href="/PENETRATION/php-cgi-cve-2012-1823.html">{{article.views}}人看过</a></span>
+        <span class="comments-top" itemprop="interactionCount">评论:<a itemprop="discussionUrl" href="/">{{ article.comment_set.count }}条评论</a></span>
+        <span class="comments-top" itemprop="interactionCount">浏览:<a itemprop="discussionUrl" href="/">{{article.views}}人看过</a></span>
         <span class="date">标签:
 	    {% for tag in article.tags.all %}
-            <a href="/tag/php-cgi">{{tag.name}}</a>
+            <a href="{% url 'article:tagurl' tag.pk %}">{{tag.name}}</a>
             {% endfor %}
         </span>
     </div>
@@ -139,6 +139,37 @@
     </div>
 {% endfor%}
 
+            <!--分页-->       
+
+            {% if is_paginated %}
+            <div class="type-post" id="pagination">
+                <ol class="page-navigator">
+                    {% if first %}
+                    <li class="current"><a href="?page=1">1</a></li>
+                    {% endif %}
+                    {% if left %}
+                        {% if left_has_more %}
+                            <li>...</li>
+                        {% endif %}
+                        {% for i in left %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                    <li><a href="?page={{ page_obj.number }}" style="color:red">{{ page_obj.number }}</a></li>
+                    {% if right  %}
+                        {% for i in right %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                        {% if right_has_more %}
+                            <li>...</li>
+                        {% endif %}
+                    {% endif %}
+                    {% if last %}
+                        <li><a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+                    {% endif %}
+                </ol>
+           </div>
+           {% endif %}
 
 </div> <!-- id="mainbody" -->
 
@@ -149,13 +180,13 @@
 
   <div class="widget widget_search">
     <h3>搜索</h3>
-    <form action="/search/" id="searchform" method="get">
-        <input type="text" id="searchkey" name="keyword" value="" class="searchkey" placeholder="Search..."/>
+    <form action="{% url 'haystack_search' %}" id="searchform" method="get">
+        <input type="search" id="searchkey" name="q" value="" class="searchkey" placeholder="Search..."/>
         <button type="submit"  id="searchsubmit">Go</button>
     </form>
   </div>
 
-  
+<!-- 
   <div class="widget">
 	<h3 class="widget-title">最新评论</h3>
 	<ul class="widget-list" id="recent-comment">
@@ -190,13 +221,14 @@
     </ul>
   </div>
 
+-->
         <div class="widget widget-category">
             <h3>分类</h3>
             {% get_categories as category_list %}
             <ul id="blogsort" class="widget-list">
                 {% for category in  category_list %}
                 <li>
-                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>13</em></a>
+                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>{{ category.get_article_num }}</em></a>
                 </li>
                 {% empty %}
                 暂无分类
@@ -206,73 +238,22 @@
 
 
   <div class="widget widget-tag">
-	<h3>随机标签</h3>
+	<h3>标签云</h3>
+
 	<div class="tag-cloud">
+            {% get_tags as tag_list %}
+            {% for tag in tag_list %}
+                
+            <a rel="tag" href="{% url 'article:tagurl' tag.pk %}">{{ tag.name}}</a>
         
-        
-        <a rel="tag" href="/tag/%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E">上传漏洞</a>
-        
-        <a rel="tag" href="/tag/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84">内存映射</a>
-        
-        <a rel="tag" href="/tag/sqlite3_exec">sqlite3_exec</a>
-        
-        <a rel="tag" href="/tag/lua">lua</a>
-        
-        <a rel="tag" href="/tag/brainfuck">brainfuck</a>
-        
-        <a rel="tag" href="/tag/socket">socket</a>
-        
-        <a rel="tag" href="/tag/php-fpm">php-fpm</a>
-        
-        <a rel="tag" href="/tag/javascript">javascript</a>
-        
-        <a rel="tag" href="/tag/phpcms">phpcms</a>
-        
-        <a rel="tag" href="/tag/%E5%A4%A7%E6%96%87%E4%BB%B6%E5%A4%84%E7%90%86">大文件处理</a>
-        
-        <a rel="tag" href="/tag/fliter">fliter</a>
-        
-        <a rel="tag" href="/tag/%E8%B5%9B%E6%A3%8D">赛棍</a>
-        
-        <a rel="tag" href="/tag/Ubuntu">Ubuntu</a>
-        
-        <a rel="tag" href="/tag/VS2010">VS2010</a>
-        
-        <a rel="tag" href="/tag/%E5%A4%A7%E6%95%B0%E4%B9%98%E6%B3%95">大数乘法</a>
-        
-        <a rel="tag" href="/tag/%E5%88%A4%E6%96%AD%E5%A5%87%E5%81%B6%E6%95%B0">判断奇偶数</a>
-        
-        <a rel="tag" href="/tag/python">python</a>
-        
-        <a rel="tag" href="/tag/%E5%8F%8D%E5%BC%B9shell">反弹shell</a>
-        
-        <a rel="tag" href="/tag/php-cgi">php-cgi</a>
-        
-        <a rel="tag" href="/tag/%E5%85%BC%E5%AE%B9%E6%80%A7">兼容性</a>
-        
-        <a rel="tag" href="/tag/XXE">XXE</a>
-        
-        <a rel="tag" href="/tag/git-shell">git-shell</a>
-        
-        <a rel="tag" href="/tag/web%E5%BA%94%E7%94%A8">web应用</a>
-        
-        <a rel="tag" href="/tag/%E5%88%97%E7%9B%AE%E5%BD%95%E6%BC%8F%E6%B4%9E">列目录漏洞</a>
-        
-        <a rel="tag" href="/tag/jar%E6%89%93%E5%8C%85">jar打包</a>
-        
-        <a rel="tag" href="/tag/%E5%AF%86%E6%96%87%E7%A0%B4%E8%A7%A3">密文破解</a>
-        
-        <a rel="tag" href="/tag/php%E8%84%9A%E6%9C%AC%E5%AE%89%E5%85%A8">php脚本安全</a>
-        
-        <a rel="tag" href="/tag/firefox">firefox</a>
-        
-        <a rel="tag" href="/tag/emlog">emlog</a>
-        
-        <a rel="tag" href="/tag/%E5%85%8D%E8%B4%B9">免费</a>
-        
-    </div>
+            {% empty %}       
+            暂无标签
+            {% endfor %}      
+        </div>
   </div>
 
+
+<!--
   <div class="widget widget-recent-entries">
 	<h3 class="widget-title">热门日志</h3>
 	<ul id="hotlog" class="widget-list">
@@ -290,7 +271,7 @@
     
     </ul>
   </div>
-  
+-->  
 
 </div>
 </div>
@@ -301,29 +282,33 @@
 		<div class="row remove-bottom">
 			<div class="col-6 columns">
 			<h3>Little About</h3>
-			<p>Phithon 非强迫症小青年  <br>
-现居先 <br>
-爱好：种花、买书、收藏明信片 <br>
-欢迎各大组织收留 <br>
-E-mail：root@leavesongs.com </p>
-			</div>
+                        <p>
+                           Ender451 科幻、技术爱好者  <br>
+                           现居 北京 <br>
+                           爱好：读书 游戏 <br>
+                           欢迎各位来串门 <br>
+                           E-mail：Ender451@qq.com
+                        </p>			
+                        </div>
 
 			<div class="col-10 columns">
 
 				<h3 class="mobile-hide">Follow me</h3>
         <div id="social-links">
-          <a href="http://weibo.com/101yx" class="sweibo" target="_blank" title="新浪微博">新浪微博</a>
+          <a href="http://weibo.com/" class="sweibo" target="_blank" title="新浪微博">新浪微博</a>
           <a href="javascript:alert(/没有腾讯微博哟/)" class="qweibo" target="_blank" title="腾讯微博">腾讯微博</a>
           <a href="javascript:alert(/墙外有什么/);window.open('http://google.com')" class="google" target="_blank" title="墙外的世界">google+</a>
-          <a href="https://github.com/phith0n" class="github" target="_blank" title="Github">github</a>
-          <a href="javascript:confirm(/mailto:root#leavesongs.com/)" class="mail" target="_blank" title="私信给我">私信给我</a>
-          <a href="/feed/" target="_blank" class="rss" title="离别歌">RSS订阅</a>
+          <a href="https://github.com/Ender451" class="github" target="_blank" title="Github">github</a>
+          <a href="javascript:confirm(/mailto:Ender451@qq.com/)" class="mail" target="_blank" title="私信给我">私信给我</a>
+          <a href="/feed/" target="_blank" class="rss" title="川陀图书馆">RSS订阅</a>
         </div>
         <div class="bot-line"></div>
 				<p class="copyright">
 	Copyright &copy; Powered by talkbook
 				&nbsp;&nbsp;<i>Designed and built with all the love in the world by <a href="https://www.leavesongs.com" target="_blank">Phithon</a> && deepsky </i>
+<!--
                     <a href="/template/change/">更换模板</a>
+-->
 				</p>
 			</div>
 		</div>

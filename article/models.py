@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+import markdown
+from django.utils.html import strip_tags
 # Create your models here.
 
 
@@ -17,6 +19,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def get_article_num(self):
+        num= Category.objects.filter(article__category__name=self.name).count()
+        return num
 
 class Tag(models.Model):
     #名称
@@ -52,14 +58,31 @@ class Article(models.Model):
     #浏览量
     views = models.PositiveIntegerField(default=0, verbose_name="浏览量")
 
+
     class Meta:
         verbose_name = '文章'
         verbose_name_plural = '文章'
         #默认排序
         ordering=['-create_time']
 
+    #自动生成摘要
+    def save(self,*args,**kwargs):
+        if not self.excerpt:
+            
+            md= markdown.Markdown(
+                extensions=[
+                           'markdown.extensions.extra',
+                           'markdown.extensions.codehilite',
+                           ]
+                )
+            self.excerpt = strip_tags(md.convert(self.body))[:54]
+        super(Article,self).save(*args,**kwargs)
+
+
     def __str__(self):
         return self.title
+
+
 
     #定义 get_absolute_url 方法 获取自身的url 
     def get_absolute_url(self):
@@ -68,6 +91,12 @@ class Article(models.Model):
         return reverse('article:detail',kwargs={'id':self.pk})
         # article --> article/urls.py app_name=article
         # detail  --> article/urls.py name='detail'
+
+    #统计浏览量
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views'])
+
 
 
 

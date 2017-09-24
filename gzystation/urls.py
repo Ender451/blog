@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^articlelist/', include('article.urls',namespace='articlelist')),
     url(r'^article/', include('article.urls',namespace='article')),
     url(r'^online/', include('online.urls', namespace='online')),
+    url(r'^search/', include('haystack.urls')),
     url(r'', include('home.urls',namespace='home')),
     url(r'', include('comments.urls',namespace='comments')),
     

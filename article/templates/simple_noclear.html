@@ -7,18 +7,17 @@
 <!-- col-11 end-->
 
 
-    <div  class="col-5 columns" id="sidebar" role="complementary">
+<div  class="col-5 columns" id="sidebar" role="complementary">
 
-        <div class="widget widget_search">
-            <h3>搜索</h3>
-            <form action="/search/" id="searchform" method="get">
-                <input type="text" id="searchkey" name="keyword" value="" class="searchkey" placeholder="Search..."/>
-                <button type="submit"  id="searchsubmit">Go</button>
-            </form>
-        </div>
+  <div class="widget widget_search">
+    <h3>搜索</h3>
+    <form action="{% url 'haystack_search' %}" id="searchform" method="get">
+        <input type="search" id="searchkey" name="q" value="" class="searchkey" placeholder="Search..."/>
+        <button type="submit"  id="searchsubmit">Go</button>
+    </form>
+  </div>
 
-
-
+<!--
         <div class="widget">
             <h3 class="widget-title">最新评论</h3>
             <ul class="widget-list" id="recent-comment">
@@ -51,13 +50,14 @@
             </ul>
         </div>
 
+-->
         <div class="widget widget-category">
             <h3>分类</h3>
             {% get_categories as category_list %}
             <ul id="blogsort" class="widget-list">
                 {% for category in  category_list %}
                 <li>
-                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>13</em></a>
+                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>{{ category.get_article_num }}</em></a>
                 </li>
                 {% empty %}
                 暂无分类
@@ -65,7 +65,7 @@
             </ul>
         </div>
 
-
+<!--
         <div class="widget widget-tag">
             <h3>随机标签</h3>
             <div class="tag-cloud">
@@ -130,7 +130,9 @@
                 <a rel="tag" href="/tag/%E5%85%8D%E8%B4%B9">免费</a>
             </div>
         </div>
+-->
 
+<!--
         <div class="widget widget-recent-entries">
             <h3 class="widget-title">热门日志</h3>
             <ul id="hotlog" class="widget-list">           
@@ -147,7 +149,7 @@
             </ul>
         </div>
 
-
+-->
         <div class="widget widget-recent-entries">
             <h3 class="widget-title">最新文章</h3>
             {% get_recent_articles as recent_article_list %}
