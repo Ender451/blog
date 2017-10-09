@@ -21,7 +21,7 @@ class ArticlelistView(ListView):
     context_object_name = 'articles'
 
     #分页功能(重复代码)
-    paginate_by = 5
+    paginate_by = 7
 
     def get_context_data(self,**kwargs):
         context =super().get_context_data(**kwargs)
@@ -165,7 +165,99 @@ def archives(request,year,month):
     context = {'articles':articles}
     return render(request,'article/articlelist.html',context)
 
+#归档 基于类
+class Archivesview(ListView):
+    model = Article
+    template_name = 'article/articlelist.html'
+    context_object_name = 'articles'
 
+    #分页功能(重复代码)
+    #归档这里的分页需要修改，这里django自带的分页是以model：Article为对象进行的分页，并没有对年月进行过滤处理。
+    #但是在context 传参的时候 我这里是进行过年月过滤处理的文章，所以分页与文章列表不一致，需要修改
+    paginate_by = 7
+    
+    def get_context_data(self,**kwargs):
+        context =super().get_context_data(**kwargs)
+
+        paginator= context.get('paginator')
+        page = context.get('page_obj')
+        is_paginated= context.get('is_paginated')
+        print(paginator,page,is_paginated)
+        pagination_data = self.pagination_data(paginator,page,is_paginated)
+
+        print('归档',pagination_data)
+        context.update(pagination_data)
+     
+        year=self.kwargs.get('year')
+        month=self.kwargs.get('month')
+        print('year:',year)
+        print('month:',month)
+        articles = Article.objects.filter(create_time__year=year,
+                                      create_time__month=month
+                                   ).order_by('-create_time')
+        context['articles'] = articles
+        #print(context)
+        return context
+
+    def pagination_data(self,paginator,page,is_paginated):
+        if not is_paginated:
+
+             return {}
+
+        left = []
+        right = []
+        left_has_more = False
+        right_has_more = False
+        first = False
+        last = False
+
+        page_number = page.number
+        total_pages = paginator.num_pages
+
+        page_range = paginator.page_range
+
+        if page_number == 1 :
+            right = page_range[page_number:page_number +2 ]
+            if right[-1] < total_pages - 1:
+                right_has_more = True
+
+            if right[-1] < total_pages:
+                last = True
+
+        elif page_number == total_pages:
+            left = page_range[(page_number -3 ) if (page_number -3) > 0 else 0:page_number - 1]
+
+            if left[0] > 2:
+                left_has_more = True
+
+            if left[0] > 1:
+                first = True
+
+        else:
+            left = page_range[(page_number - 3) if (page_number -3) > 0 else 0:page_number - 1]
+            right = page_range[page_number:page_number + 2]
+
+            if right[-1] < total_pages - 1:
+               right_has_more = True
+            if right[-1] < total_pages:
+               last = True
+
+            if left[0] > 2:
+               left_has_more = True
+            if left[0] > 1:
+               first = True
+
+        data = {
+            'left':left,
+            'right': right,
+            'left_has_more':left_has_more,
+            'right_has_more':right_has_more,
+            'first':first,
+            'last':last,
+             }
+        print(data)
+        return data
+        
 
 
 #分类 视图
@@ -198,12 +290,12 @@ class CategoryView(ListView):
         is_paginated= context.get('is_paginated')
         pagination_data = self.pagination_data(paginator,page,is_paginated)
 
-        #print(pagination_data)
+        print('分类',pagination_data)
         context.update(pagination_data)
         name= get_object_or_404(Category,pk=self.kwargs.get('pk'))
         #print('name:',name)
         context['categoryname'] = name
-
+        #print(context)
         return context
 
     #分页功能（重复代码）
