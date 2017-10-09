@@ -1,0 +1,77 @@
+{% load staticfiles %}
+
+<div id="footer">
+        <!-- copyright -->
+        <div class="container">
+                <div class="row remove-bottom">
+                        <div class="col-6 columns">
+                        <h3>Little About</h3>
+                        <p>
+                           Ender451 科幻、技术爱好者  <br>
+                           现居 北京 <br>
+			   爱好：读书 游戏 <br>
+                           欢迎各位来串门 <br>
+                           E-mail：Ender451@qq.com 
+                        </p>
+                        </div>
+
+                        <div class="col-10 columns">
+
+                                <h3 class="mobile-hide">Follow me</h3>
+        <div id="social-links">
+          <a href="http://weibo.com/" class="sweibo" target="_blank" title="新浪微博">新浪微博</a>
+          <a href="javascript:alert(/没有腾讯微博哟/)" class="qweibo" target="_blank" title="腾讯微博">腾讯微博</a>
+          <a href="javascript:alert(/墙外有什么/);window.open('http://google.com')" class="google" target="_blank" title="墙外的世界">google+</a>
+          <a href="https://github.com/Ender451" class="github" target="_blank" title="Github">github</a>
+          <a href="javascript:confirm(/mailto:Ender451@qq.com/)" class="mail" target="_blank" title="私信给我">私信给我</a>
+          <a href="/feed/" target="_blank" class="rss" title="川陀图书馆">RSS订阅</a>
+        </div>
+        <div class="bot-line"></div>
+                                <p class="copyright">
+        Copyright &copy; Powered by talkbook
+                                &nbsp;&nbsp;<i>Designed and built with all the love in the world by <a href="https://www.leavesongs.com" target="_blank">Phithon</a> && deepsky </i>
+<!--
+                    <a href="/template/change/">更换模板</a>
+-->
+                                </p>
+                        </div>
+                </div>
+        </div>
+        <!-- /copyright -->
+</div>
+
+
+
+
+
+<a href="#" id="go-top">Top ↑</a>
+<script src="{% static 'home/js/jquery.appear.js' %}"></script>
+<script src="{% static 'home/js/config.js' %}"></script>
+<script>^M
+var _hmt = _hmt || [];^M
+(function() {^M
+  var hm = document.createElement("script");^M
+  hm.src = "https://hm.baidu.com/hm.js?ad9ab5e37c2811b9f0979e46123fc898";^M
+  var s = document.getElementsByTagName("script")[0]; ^M
+  s.parentNode.insertBefore(hm, s);^M
+})();^M
+</script>
+
+<script src="{% static 'home/js/jquery.fancybox.pack.js' %}"></script>
+<script>
+$(document).ready(function () {
+    $(".entry a").each(function (i, e) {
+        if(e.host != 'www.leavesongs.com') {
+            e.target = '_blank';
+        }
+    });
+    $(".entry img").each(function (i, e) {
+        if(e.parentNode.tagName.toUpperCase() != 'A') {
+            $(e).wrap('<a href="'+escapeHtml(e.src)+'" class="fancybox"></a>');
+        } else {
+            $(e.parentNode).addClass('fancybox');
+        }
+    });
+    $('.fancybox').fancybox();
+})
+</script>

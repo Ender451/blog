@@ -1,0 +1,16 @@
+from django.contrib import admin
+from article.models import Article,Category,Tag
+
+# Register your models herea.
+
+
+class ArticleAdmin(admin.ModelAdmin):
+    #列表展示的字段信息
+    list_display = ('title','category','tags','author','create_time','views',)
+    #搜索索引
+    search_fields = ('title', 'author',)
+
+
+admin.site.register(Article,ArticleAdmin)
+admin.site.register(Category)
+admin.site.register(Tag)
