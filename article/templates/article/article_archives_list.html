@@ -1,0 +1,90 @@
+{% extends 'simple_base.html' %}
+{% load staticfiles %}
+{% block title %}文章列表{% endblock %}
+
+{% block path %}
+                <a href="/">首页 >></a> 
+                归档>>{{ year }}年{{ month }}月
+{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="col-11 columns" id="mainbody">
+        {% for article in articles %}
+            <div class="post type-post" >
+    	        <h2 class='loading-title' itemprop="name headline">
+                <!--
+                <a itemtype="url" href="/article/{{article.pk}}/" title="{{article.title}}">{{article.title}}</a>
+                这两种方法都可以获取到 article url
+                -->
+                <a itemtype="url" href="{{ article.get_absolute_url }}" title="{{article.title}}">{{article.title}}</a>
+                </h2>
+                <div class="details-up">
+                <span class="author">作者:{{ article.author }}</span>
+                <span class="category">分类:<a href="{% url 'article:category' article.category.pk %}">{{article.category.name}}</a></span>
+                <span class="date">时间：{{ article.create_time }}</span>
+                <span class="comments-top" itemprop="interactionCount">评论:<a itemprop="discussionUrl" href="/">{{ article.comment_set.count }}条评论</a></span>
+                <span class="comments-top" itemprop="interactionCount">浏览:<a itemprop="discussionUrl" href="/">{{article.views}}人看过</a></span>
+                <span class="date">标签:
+                {% for tag in article.tags.all %}
+                <a href="{% url 'article:tagurl' tag.pk %}">{{tag.name}}</a>
+                {% endfor %}
+                </span>
+                </div>
+                <div class="entry">
+                    {{article.excerpt}}
+                </div>
+            </div>
+
+                {% empty %}
+            <div class="post type-post">
+                还没有文章发布
+            </div>
+                {% endfor%}
+
+            <!--分页-->
+
+            {% if is_paginated %}
+            <div class="type-post" id="pagination">
+                <ol class="page-navigator">
+                    {% if first %}
+                    <li class="current"><a href="?page=1">1</a></li>
+                    {% endif %}
+                    {% if left %}
+                        {% if left_has_more %}
+                            <li>...</li>
+                        {% endif %}
+                        {% for i in left %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                    <li><a href="?page={{ page_obj.number }}" style="color:red">{{ page_obj.number }}</a></li>
+                    {% if right  %}
+                        {% for i in right %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endfor %}
+                        {% if right_has_more %}
+                            <li>...</li>
+                        {% endif %}
+                    {% endif %}
+                    {% if last %}
+                        <li><a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+                    {% endif %}
+                </ol>
+           </div>
+           {% endif %}
+
+    </div> <!-- id="mainbody" -->
+
+    
+
+
+
+
+
+{% endblock %}
+
+
+

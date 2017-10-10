@@ -168,13 +168,24 @@ def archives(request,year,month):
 #归档 基于类
 class Archivesview(ListView):
     model = Article
-    template_name = 'article/articlelist.html'
+    template_name = 'article/article_archives_list.html'
     context_object_name = 'articles'
 
     #分页功能(重复代码)
-    #归档这里的分页需要修改，这里django自带的分页是以model：Article为对象进行的分页，并没有对年月进行过滤处理。
-    #但是在context 传参的时候 我这里是进行过年月过滤处理的文章，所以分页与文章列表不一致，需要修改
     paginate_by = 7
+
+    #重写父类的 get_queryset() 方法
+    #因为父类的方法是获取整个 model 对象列表，需要修改为获取指定对象列表
+    #在此就是 指定归档时间 的文章列表
+    def get_queryset(self):
+        
+        year=self.kwargs.get('year')
+        month=self.kwargs.get('month')
+
+        print('get_queryset ok')
+        return super(Archivesview,self).get_queryset().filter(create_time__year=year,
+                                                              create_time__month=month)
+
     
     def get_context_data(self,**kwargs):
         context =super().get_context_data(**kwargs)
@@ -187,16 +198,13 @@ class Archivesview(ListView):
 
         print('归档',pagination_data)
         context.update(pagination_data)
-     
+
+        #将 归档 年月传给 templates模板
         year=self.kwargs.get('year')
         month=self.kwargs.get('month')
-        print('year:',year)
-        print('month:',month)
-        articles = Article.objects.filter(create_time__year=year,
-                                      create_time__month=month
-                                   ).order_by('-create_time')
-        context['articles'] = articles
-        #print(context)
+        context['year']=year
+        context['month']=month
+        print('context:',context)
         return context
 
     def pagination_data(self,paginator,page,is_paginated):
@@ -295,7 +303,7 @@ class CategoryView(ListView):
         name= get_object_or_404(Category,pk=self.kwargs.get('pk'))
         #print('name:',name)
         context['categoryname'] = name
-        #print(context)
+        print('context',context)
         return context
 
     #分页功能（重复代码）
@@ -367,7 +375,7 @@ class TagView(ListView):
     #重写父类的 get_queryset() 方法
     def get_queryset(self):
         cate = get_object_or_404(Tag,pk=self.kwargs.get('pk'))
-        #print('tag',cate)
+        print('tag',cate)
         return super(TagView,self).get_queryset().filter(tags=cate)
 
 
