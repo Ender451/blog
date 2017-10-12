@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'a1o&7sfd7f($8i=!(#jkqr*jopu#ru6x!7$noz(pc=ht$yk&ej'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = False
+#DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['blog.guozhongyuan.cn']
 #ALLOWED_HOSTS = ['*']
@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'article.apps.ArticleConfig',
     'home.apps.HomeConfig',
     'comments.apps.CommentsConfig',
+    'users',
+    'independentarticle.apps.IndependentarticleConfig',
     
 ]
 
@@ -103,10 +105,10 @@ WSGI_APPLICATION = 'gzystation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'xxx',
+        'NAME': 'xxxxxx',
         'HOST' : 'xxx.xxx.xxx.xxx',
         'PORT' : xxxx,
-        'USER' : 'root',
+        'USER' : 'xxxx',
         'PASSWORD' : 'xxx',
         'CHARSET' : 'utf8',
     }

@@ -204,6 +204,7 @@ class Archivesview(ListView):
         month=self.kwargs.get('month')
         context['year']=year
         context['month']=month
+        print(year,month)
         print('context:',context)
         return context
 

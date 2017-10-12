@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load blog_tags %}
+
+{% block title %}文章详情{% endblock %}
+
+{% block path %}
+                <a href="/">首页 >></a> 
+                {{article.category.name}} >>
+                <a href="/article/{{article.pk}}">{{article.title}}</a>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <div class="col-11 columns" id="mainbody" role="main">
+        <div class="post-single type-post">
+            <h1 class="article-h1">{{article.title}}</h1>
+            <div class="details-up">
+  	    <span class="author">作者: {{article.author}}</span>
+  
+            <span class="category">分类: <a href="{% url 'article:category' article.category.pk %}">{{article.category.name}}</a></span>
+  
+            <span class="date">时间: {{article.create_time}}</span>
+            <span class="comments-top" itemprop="interactionCount">评论：<a itemprop="discussionUrl" href="/">{{ article.comment_set.count }}条评论</a></span>
+            <span class="comments-top" itemprop="interactionCount">浏览：<a itemprop="discussionUrl" href="/">{{ article.views }}人看过</a></span>
+  
+            <span class="date">标签:
+            {% for tag in article.tags.all %}
+            <a href="{% url 'article:tagurl' tag.pk %}">{{tag.name}}</a>
+            {% endfor %}
+            </span>
+
+            </div>
+            
+            <div class="entry">
+            <!--文章正文-->
+            {{article.body | safe}}
+            </div>
+
+
+
+
+            <div itemprop="keywords" class="tags-meta">
+                标签:
+                     {% for tag in article.tags.all %}
+                     <a href="{% url 'article:tagurl' tag.pk %}">{{tag.name}}</a>
+                     {% endfor %}
+
+            </div>
+            <br>
+
+{% endblock %}
+
+
+{% block comment %}
+
+
+<div id="comments" class="comments">
+    <h3>已有{{ article.comment_set.count }}条评论</h3>
+    <ol class="comment-list">
+        {% for comment in comment_list %}
+        <li class="comment-body">
+            <div class="clearfix">
+               <div class="comment-author">
+                   <img src="{% static 'comments/picture/comment_name.png' %}">
+               </div>
+               <div class="comment-meta">
+                    <div class="fn">
+                       <a href="">{{ comment.name }}</a>
+                    </div>
+                    <p>{{ comment.text }}</p>
+                    <span class="comment-time">时间:{{ comment.create_time }}</span>
+               </div>
+            </div>
+        暂无评论
+        {% endfor %}
+
+    </ol>
+</div>
+
+
+<div id="reply">
+</div>
+
+<div id="comment-place">
+    <div id="comment-post" class="respond none-resize">
+        <div id="respond">
+            <h3 id="response">添加新评论</h3>
+            <form method="post" id="comment-form" role="form" action="{% url 'comments:independentarticle_comment' article.pk %}">
+                {% csrf_token %}
+                <p>
+                    <label for="{{ form.name.id_for_label }}" class="required">称呼</label>
+                    <!-- <input type="text" name="nickname" value="" placeholder="昵称" maxlength="64" required id="id_nickname" /> -->
+                    {{ form.name }}
+                    {{ form.name.errors }}
+                </p>
+                <p>
+                    <label for="{{ form.email.id_for_label }}">Email</label>
+                    <!-- <input type="text" name="email" value="" placeholder="邮箱（可留空）" maxlength="254" id="id_email" /> -->
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </p>
+                <p>
+                    <label for="{{ form.url.id_for_label }}">网站</label>
+                    <!-- <input type="text" name="url" value="" placeholder="链接（可留空）" maxlength="200" id="id_url" /> -->
+                    {{ form.url }}
+                    {{ form.url.errors }}
+                </p>
+                <p>
+                    <label for="{{ form.text.id_for_label }}" class="required">内容</label>
+                    <!-- <textarea name="content" cols="40" rows="6" required id="id_content"></textarea> -->
+                    {{ form.text }}
+                    {{ form.text.errors}}
+                </p>
+                <!--                
+                <p>
+                    <label style="float:left;">验证码</label>
+                    <div class="row" style="margin-top: 8px">
+                    <div class="col-xs-4"><input autocomplete="off" id="id_captcha_1" name="captcha_1" type="text" placeholder="验证码" /> <input id="id_captcha_0" name="captcha_0" type="hi
+dden" value="bf1a523df57b7cccdbcb030128087c17914b2270" />
+                    </div>
+                    <div class="col-xs-4">
+                        <img src="picture/e79da8a0db0947aebdcca042b1f8b118.gif" alt="captcha" class="captcha" height="25" />
+                    </div>  
+                    </div> 
+                </p>
+                -->
+                <p>
+                    <button type="submit" class="submit">提交评论</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

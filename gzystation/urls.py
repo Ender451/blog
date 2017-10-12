@@ -19,8 +19,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^articlelist/', include('article.urls',namespace='articlelist')),
-    url(r'^article/', include('article.urls',namespace='article')),
+    url(r'^articlelist/', include('article.urls',namespace='articlelist')),                          #文章列表
+    url(r'^article/', include('article.urls',namespace='article')),                                  #一般文章
+    url(r'^independentarticle/', include('independentarticle.urls',namespace='independentarticle')), #独立文章
     url(r'^online/', include('online.urls', namespace='online')),
     url(r'^search/', include('haystack.urls')),
     url(r'', include('home.urls',namespace='home')),
