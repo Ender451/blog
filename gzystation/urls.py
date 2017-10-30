@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^independentarticle/', include('independentarticle.urls',namespace='independentarticle')), #独立文章
     url(r'^online/', include('online.urls', namespace='online')),
     url(r'^search/', include('haystack.urls')),
+    url(r'^user/',include('users.urls')),                                                            #用户注册激活
     url(r'', include('home.urls',namespace='home')),
     url(r'', include('comments.urls',namespace='comments')),
     
