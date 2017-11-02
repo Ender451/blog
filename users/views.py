@@ -41,11 +41,15 @@ class RegisterView(View):
         username = request.GET.get('username','')
         password = request.GET.get('password','')
         email = request.GET.get('email','')
+      
+        nickname = request.GET.get('nickname','')
+        realname = nickname
+        print("nickname:",nickname)
 
         user = User.objects.create_user(username=username,password=password,email=email)
         validkey = UserExt.gen_validkey()
-        user_ext = UserExt.objects.create(user=user,realname='',birthday=datetime.date(1945,1,1),\
-                                         nickname='',avatar='default',telephone='',logintime=timezone.now(),validkey=validkey)
+        user_ext = UserExt.objects.create(user=user,realname=realname,birthday=datetime.date(1945,1,1),\
+                                         nickname=nickname,avatar='default',telephone='',logintime=timezone.now(),validkey=validkey)
 
         content = '<a href="http://blog.guozhongyuan.cn/user/active/?username={username}&validkey={validkey}"> 点击此处进行激活  </a>'
         send_mail('User Register',content.format(username=username,validkey=validkey),settings.EMAIL_HOST_USER,[email])
