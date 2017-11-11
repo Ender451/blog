@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<!-- 每个 include html文件中 都需要 标注 加载静态变量 “{% load staticfiles %}” -->
+<html class="no-js">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="川陀图书馆管理员的学习测试网站。" />
+    <title>川陀图书馆 | 川陀图书馆</title>
+    <link rel="alternate" type="application/atom+xml" href="/feed/" title="川陀图书馆" />
+
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js "></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js "></script>
+
+    <link href="{% static 'home/css/base.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'home/css/style.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'article/css/highlights/colorful.css' %}" rel="stylesheet" type="text/css" />
+    <script src="{% static 'home/js/jquery-1.9.1.min.js' %}"></script>
+    <script src="{% static 'home/js/common_tpl.js' %}" type="text/javascript"></script>
+
+    <link rel="shortcut icon" href="/static/deep/images/favicon.ico" />
+
+    
+    <style>
+       div.row .col-xs-4 {
+         float: left;
+         margin-left: 4px;
+       }
+       div.row .col-xs-4 img {
+         margin-left: 5px;
+       }
+       span.highlighted {
+           color:red;
+       }
+    </style>
+
+    <link href="{% static 'home/css/jquery.fancybox.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'home/css/code.css' %}">
+    
+
+</head>
+
+
+<body>
+
+
+<div id="header">
+    <div class="container">
+        <h1 class="h1-title">
+            <a href="{% url 'home:index' %}" style="text-decoration:none">
+               <img src="{% static 'home/picture/pythonlogo.png' %}" alt="川陀图书馆" />
+               The Trantor Library
+            </a>
+        </h1>
+        <div id="nav">
+        <input type="checkbox" id="button">
+        <label for="button" onclick>菜单</label>
+        <ul>
+            <li class="item ">
+                <a href="{% url 'home:index' %}" >首页</a>
+            </li>
+            <li class="item ">
+                <a href="/articlelist/" >文章</a>
+            </li>
+
+            <li class="item ">
+                <a href="/independentarticle/1" >关于</a>
+            </li>
+
+            <li class="item ">
+                <a href="/independentarticle/2" >友链</a>
+            </li>
+
+            <li class="item ">
+                <a href="https://github.com/Ender451" target="_blank" >项目</a>
+            </li>
+
+            <li class="item ">
+                <a href="http://blog.guozhongyuan.cn/admin" >管理</a>
+            </li>
+
+            <li class="item ">
+                <a href="http://www.guozhongyuan.cn" >Jumpserver</a>
+            </li>
+
+            <li class="item ">
+                <a href="http://blog.guozhongyuan.cn/user/" >用户</a>
+            </li>
+
+        </ul>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="banner-bar">
+    <div class="container">
+        <div class="col-12 columns">
+            <div class="place">
+            <div id="nav">
+                    <a data-toggle="modal" data-target="#dialog_login" data-backdrop="static" style="cursor:pointer" >登录</a>
+                
+                    <a data-toggle="modal" data-target="#dialog_register" data-backdrop="static" style="cursor:pointer" >注册</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+        <div class="col-11 columns" id="mainbody">
+ 
+        <p>
+        	<li>1</li>
+        	<li>2</li>
+        	<li>3</li>
+        	<li>4</li>
+        	<li>5</li>
+        	<li>6</li>
+        	<li>7</li>
+        	<li>8</li>
+        	<li>9</li>
+        	<li>10</li>
+        	<li>11</li>
+        	<li>12</li>
+        	<li>13</li>
+        	<li>14</li>
+        	<li>15</li>
+        	<li>16</li>
+        	<li>17</li>
+        	<li>18</li>
+        	<li>19</li>
+        	<li>20</li>
+        	<li>21</li>
+        	<li>22</li>
+        	<li>23</li>
+        	<li>24</li>
+        	<li>25</li>
+        	<li>26</li>
+        	<li>27</li>
+        	<li>28</li>
+        	<li>29</li>
+        	<li>30</li>
+        	<li>31</li>
+        	<li>32</li>
+        	<li>33</li>
+        	<li>34</li>
+        	<li>35</li>
+        	<li>36</li>
+        	<li>37</li>
+        	<li>38</li>
+        	<li>39</li>
+        	<li>40</li>
+        	<li>41</li>
+        	<li>42</li>
+        	<li>43</li>
+        	<li>44</li>
+        	<li>45</li>
+        </p>
+
+        </div>
+
+        <div  class="col-5 columns" id="sidebar" role="complementary">
+
+        </div>
+
+</div>
+
+
+
+
+        <!-- 登录 模态框 -->
+	<div class="modal" id="dialog_login">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4>用户登录</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form" method="post" id="form_login">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="username" class="col-xs-4 control-label">用户名/邮箱</label>
+							<div class="col-xs-6">
+								<input type="text" class="form-control" name="username" id="username" placeholder="用户名/邮箱" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-xs-4 control-label">密码</label>
+							<div class="col-xs-6">
+								<input type="password" class="form-control" name="password" id="password" placeholder="密码" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-xs-offset-4 col-xs-10">
+								<button type="button" class="btn btn-primary" id="btn_login">登录</button>
+								<button type="button" class="btn btn-link" id="btn_reset_password">忘记密码</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="modal" id="dialog_register">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4>用户注册</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" role="form" method="post" id="form_register">
+						{% csrf_token %}
+						<div class="form-group">
+							<label for="username" class="col-xs-4 control-label">用户名</label>
+							<div class="col-xs-6">
+								<input type="text" class="form-control" name="username" id="username" placeholder="用户名" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="email" class="col-xs-4 control-label">邮箱</label>
+							<div class="col-xs-6">
+								<input type="text" class="form-control" name="email" id="email" placeholder="邮箱" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-xs-4 control-label">密码</label>
+							<div class="col-xs-6">
+								<input type="password" class="form-control" name="password" id="password" placeholder="密码" value="">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password2" class="col-xs-4 control-label">确认密码</label>
+							<div class="col-xs-6">
+								<input type="password" class="form-control" name="password2" id="password2" placeholder="确认密码" value="">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-xs-offset-4 col-xs-10">
+								<button type="button" class="btn btn-primary" id="btn_register">注册</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+
+
+
+

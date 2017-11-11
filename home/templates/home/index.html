@@ -12,12 +12,19 @@
     <title>首页 | 川陀图书馆</title>
     <link rel="alternate" type="application/atom+xml" href="/feed/" title="川陀图书馆" />
 
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> <!-- bootstrap -->
+
     <link href="{% static 'home/css/base.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'home/css/style.css' %}" rel="stylesheet" type="text/css" />
     <script src="{% static 'home/js/jquery-1.9.1.min.js' %}"></script>
     <script src="{% static 'home/js/common_tpl.js' %}" type="text/javascript"></script>
     <link rel="shortcut icon" href="{% static 'home/images/favicon.ico' %}" />
-    
+    <!-- bootstrap -->
+    <!--
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js "></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js "></script>
+    -->
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -64,7 +71,11 @@
             <li class="item ">
                 <a href="http://www.guozhongyuan.cn" >Jumpserver</a>
             </li>
-            
+
+            <li class="item ">
+                <a href="http://blog.guozhongyuan.cn/user/" >用户</a>
+            </li>           
+
         </ul>
         
         </div>
@@ -197,28 +208,8 @@
             <div class="comments-link"><cite>影乐</cite>：<a href="/other/tinger.html#comment-2914">学长厉害了</a></div>
         </li>
     
-        <li id="comment" class="clearfix">
-            <img class="avatar" src="picture/d41d8cd98f00b204e9800998ecf8427e.jpg" alt="%s" width="40" height="40">
-            <div class="comments-link"><cite>&lt;audio src=x onerror=alert(&#39;audio&#39;);&gt;</cite>：<a href="/PENETRATION/getshell-via-ssrf-and-redis.html#comment-2913">&lt;audio src=x onerror=alert(&#39;audio&#39;);&gt;
-煮屎者</a></div>
-        </li>
     
-        <li id="comment" class="clearfix">
-            <img class="avatar" src="picture/2f2224c85fe48ba7ab31fb3100745d53.jpg" alt="%s" width="40" height="40">
-            <div class="comments-link"><cite>墨攻</cite>：<a href="/PENETRATION/metinfo-5.3.17-sql-injection.html#comment-2912">最近在审计一个小的cms，看了半天竟然没发现漏洞，我开始怀疑我的职业了，不知大佬能否帮忙看一下...</a></div>
-        </li>
-    
-        <li id="comment" class="clearfix">
-            <img class="avatar" src="picture/d41d8cd98f00b204e9800998ecf8427e.jpg" alt="%s" width="40" height="40">
-            <div class="comments-link"><cite>Kyrie</cite>：<a href="/PENETRATION/django-debug-page-xss.html#comment-2910">这里会不会造成类似jinjia2模板注入的问题，如果有的话是不是就从一个XSS变成一个RCE了</a></div>
-        </li>
-    
-        <li id="comment" class="clearfix">
-            <img class="avatar" src="picture/c4267eb6d17276fa31c547ac71611e90.jpg" alt="%s" width="40" height="40">
-            <div class="comments-link"><cite>phithon</cite>：<a href="/PENETRATION/django-debug-page-xss.html#comment-2911">@Kyrie 不会，因为不存在模板字符串拼接，而且Django的模板沙箱也比较厉害。</a></div>
-        </li>
-    
-    </ul>
+        </ul>
   </div>
 
 -->
@@ -263,11 +254,6 @@
     
         <li><a href="/THINK/banjia.html">博客搬家成功</a></li>
     
-        <li><a href="/PENETRATION/vps-pentest.html">对自己VPS的一次安全检测</a></li>
-    
-        <li><a href="/C/CGIforC_1.html">C语言CGI编程入门(一)</a></li>
-    
-        <li><a href="/C/gh0st_2.html">gh0st源码分析与远控的编写(二)</a></li>
     
     </ul>
   </div>
