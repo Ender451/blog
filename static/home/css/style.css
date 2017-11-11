@@ -147,6 +147,7 @@ ul.project li:hover i.icon-share{
   color: #fff;
   height: 10px;
   line-height: 10px;
+  box-sizing:content-box;
 }
 #sidebar .widget-recent-entries li{
   list-style: inside disc;color:#ddd;line-height: 22px;
