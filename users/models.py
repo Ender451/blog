@@ -34,3 +34,6 @@ class UserExt(models.Model):
 
     def __str__(self):
         return self.realname
+   
+    def nickname_text(self):
+        return self.user.username if self.nickname == '' else self.nickname
