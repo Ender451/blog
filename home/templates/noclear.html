@@ -62,7 +62,7 @@
             <ul id="blogsort" class="widget-list">
                 {% for category in  category_list %}
                 <li>
-                    <a href="{% url 'article:category' category.pk %}">{{ category.name }}<em>{{ category.get_article_num}}</em></a>
+                    <a href="{% url 'article:category' category.pk %}" >{{ category.name }}<em style="box-sizing:content-box;">{{ category.get_article_num}}</em></a>
                 </li>
                 {% empty %}
                 暂无分类

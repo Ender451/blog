@@ -27,7 +27,7 @@ from django.contrib import messages
 from django.db import transaction #事务
 
 from django.conf import settings
-
+from home.models import Visitors
 
 
 class RegisterView(View):
@@ -291,5 +291,17 @@ class UserExtAvatarView(LoginRequiredMixin, TemplateResponseMixin, View):
 #test
 
 def test(request):
+    sum_num = Visitors.objects.all().count()
+    start_num = int(sum_num) - 14
+    #访问人数  选取最近14天的数据
+    accessdata = Visitors.objects.all().order_by('Visit_day')[start_num:sum_num]
     
-    return render(request,'user/usertest.html')
+    #limit_num =
+    context = {
+               'accessdata':accessdata
+              }   
+    return render(request,'user/usertest.html',context)
+
+
+
+

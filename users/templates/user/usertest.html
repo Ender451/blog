@@ -31,7 +31,8 @@
     <script type="text/javascript" src="{% static '/home/js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static '/home/js/bootstrap.js' %}"></script>
     <script type="text/javascript" src="{% static '/home/js/sweetalert.min.js' %}"></script>
-
+    <!-- echarts -->
+    <script src="https://cdn.bootcss.com/echarts/3.8.5/echarts-en.common.js"></script>
 
     <link rel="shortcut icon" href="/static/deep/images/favicon.ico" />
 
@@ -129,52 +130,21 @@
 <div class="container">
         <div class="col-11 columns" id="mainbody">
  
+        <div id="main" style="width: 1200px;height:600px;"></div>
+        
         <p>
         	<li>1</li>
         	<li>2</li>
         	<li>3</li>
-        	<li>4</li>
-        	<li>5</li>
-        	<li>6</li>
-        	<li>7</li>
-        	<li>8</li>
-        	<li>9</li>
-        	<li>10</li>
-        	<li>11</li>
-        	<li>12</li>
-        	<li>13</li>
-        	<li>14</li>
-        	<li>15</li>
-        	<li>16</li>
-        	<li>17</li>
-        	<li>18</li>
-        	<li>19</li>
-        	<li>20</li>
-        	<li>21</li>
-        	<li>22</li>
-        	<li>23</li>
-        	<li>24</li>
-        	<li>25</li>
-        	<li>26</li>
-        	<li>27</li>
-        	<li>28</li>
-        	<li>29</li>
-        	<li>30</li>
-        	<li>31</li>
-        	<li>32</li>
-        	<li>33</li>
-        	<li>34</li>
-        	<li>35</li>
-        	<li>36</li>
-        	<li>37</li>
-        	<li>38</li>
-        	<li>39</li>
-        	<li>40</li>
-        	<li>41</li>
-        	<li>42</li>
-        	<li>43</li>
-        	<li>44</li>
-        	<li>45</li>
+                <li>3</li>
+                <li>3</li>
+                <li>3</li>
+                <li>3</li>
+                <li>3</li>
+                <li>3</li>
+                <li>3</li>
+                <li>3</li>
+                <li>3</li>
         </p>
 
         </div>
@@ -313,6 +283,102 @@
 
 
 	<script type="text/javascript">
+
+                var myChart = echarts.init(document.getElementById('main'));
+                option = {
+                   title: {
+                       text: '博客访问人数',
+                       subtext: '博客访问人数'
+                   },
+                   tooltip: {
+                       trigger: 'axis'
+                   },
+                   legend: {
+                       data:['访问人数']
+                   },
+                   dataZoom:[{
+                       type: 'slider',
+                       show: true
+                       //start:45,
+                       //end:100
+                   }],
+                   toolbox: {
+                       show: true,
+                       feature: {
+                           dataZoom: {
+                               yAxisIndex: 'none'
+                           },
+                           dataView: {readOnly: false},
+                           restore: {},
+                           saveAsImage: {}
+                       }
+                   },
+                   xAxis:  {
+                       type: 'category',
+                       boundaryGap: true,
+                       data: [
+                       {% for line in accessdata %}
+                       '{{ line.Visit_day|date:"Y-F-j" }}',
+                       {% endfor %}
+                       ]
+                   },
+                   yAxis: [
+                       {
+                           name:'人次',
+                           type: 'value',
+                           axisLabel: {
+                               formatter: '{value}'
+                           }
+                       }
+                   ],
+                   series: [
+                       {
+                           name:'访问人数',
+                           type:'line',
+                           data:[
+                           {% for line in accessdata %}
+                           {{line.Visitors_number}},
+                           {% endfor %}
+                           ],
+                           markLine: {
+                               data: [
+                                   {
+                                       type: 'average',
+                                       name: '平均值',
+                                       label: {
+                                           normal: {
+                                               position: 'end',
+                                               formatter: '平均值:{c}'
+                                           }
+                                       },
+                                   },
+                                   [{
+                                       symbol: 'none',
+                                       x: '90%',
+                                       yAxis: 'max'
+                                   }, {
+                                       symbol: 'circle',
+                                       label: {
+                                           normal: {
+                                               position: 'start',
+                                               formatter: '{b}:{c} '
+                                           }
+                                       },
+                                       type: 'max',
+                                       name: '最大值'
+                                   }]
+                               ]
+                           }
+                       }
+
+                   ]
+               };
+
+                myChart.setOption(option);
+
+
+
+
 		jQuery(document).ready(function() {
 			jQuery('#btn_register').on('click', function() {
 				var params = jQuery('#form_register').serializeArray();

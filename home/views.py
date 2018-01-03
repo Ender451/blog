@@ -3,11 +3,14 @@ from django.shortcuts import render
 
 # Create your views here.
 from article.models import Article,Tag,Category
+from home.models import Visitors
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+import time
 
 def index(request):
     #return HttpResponse("时空构建中")
@@ -31,6 +34,16 @@ class IndexView(ListView):
     def get_context_data(self,**kwargs):
         context =super().get_context_data(**kwargs)
         
+        #访客人数统计 +1
+        day = str(time.strftime('%Y-%m-%d',time.localtime(time.time())))
+        print(day)
+        #access = Visitors.objects.filter(Visit_day=day)
+        access = get_object_or_404(Visitors,Visit_day=day)
+        if access:
+            access.increase_Visitors_number()
+        else:
+            access = Visitors.objects.create(Visit_day=day,Visitors_number=0)                                       
+
         paginator= context.get('paginator')
         page = context.get('page_obj')
         is_paginated= context.get('is_paginated')
