@@ -37,12 +37,23 @@ class IndexView(ListView):
         #访客人数统计 +1
         day = str(time.strftime('%Y-%m-%d',time.localtime(time.time())))
         print(day)
+        #access = get_object_or_404(Visitors,Visit_day=day)
+        
         #access = Visitors.objects.filter(Visit_day=day)
-        access = get_object_or_404(Visitors,Visit_day=day)
-        if access:
+        #if access :
+        #    access[0].increase_Visitors_number()        
+        #else:
+        #    Visitors.objects.create(Visit_day=day,Visitors_number=1)
+
+        #filter返回的是一个对象列表，所以model调用时需要指向为[0]
+        #get返回的是对象,可以直接调用model函数，但是当get查询为空时会报错，所以需要使用try
+
+        try:
+            access = Visitors.objects.get(Visit_day=day)
             access.increase_Visitors_number()
-        else:
-            access = Visitors.objects.create(Visit_day=day,Visitors_number=0)                                       
+        except Exception as e:
+            print(e)
+            access = Visitors.objects.create(Visit_day=day,Visitors_number=1)   
 
         paginator= context.get('paginator')
         page = context.get('page_obj')
